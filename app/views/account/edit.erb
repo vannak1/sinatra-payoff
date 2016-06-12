@@ -1,0 +1,8 @@
+<div class="row">
+  <h3> Edit Account </h3>
+  <form method="post" action="/account/<%=@accounts.id%>">
+    <input id="hidden" type="hidden" name="_method" value="PATCH">
+    <input type="text" name="content" value="<%= @accounts.content %>">
+    <input type="submit" value="submit">
+  </form>
+</div>

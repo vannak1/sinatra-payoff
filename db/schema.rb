@@ -11,15 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160611195240) do
+ActiveRecord::Schema.define(version: 20160612205537) do
 
-  create_table "users", force: :cascade do |t|
-    t.string   "f_name"
-    t.string   "l_name"
-    t.string   "email"
-    t.string   "password_digest"
+  create_table "accounts", force: :cascade do |t|
+    t.string   "content"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+# Could not dump table "users" because of following NoMethodError
+#   undefined method `[]' for nil:NilClass
 
 end

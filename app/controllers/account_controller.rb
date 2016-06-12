@@ -17,62 +17,61 @@ class AccountsController < ApplicationController
     end
   end
 
-  post '/tweets' do
+  post '/account' do
     if params[:content] == ""
-      redirect to "/tweets/new"
+      redirect to "/account/new"
     else
       user = User.find_by_id(session[:user_id])
-      @tweet = Tweet.create(:content => params[:content], :user_id => user.id)
-      redirect to "/tweets/#{@tweet.id}"
+      @accounts = Account.create(:content => params[:content], :user_id => user.id)
+      redirect to "/account/#{@accounts.id}"
     end
   end
 
-  get '/tweets/:id' do
+  get '/account/:id' do
     if session[:user_id]
-      @tweet = Tweet.find_by_id(params[:id])
-      erb :'tweets/show_tweet'
+      @accounts = Account.find_by_id(params[:id])
+      erb :'account/show'
     else
       redirect to '/login'
     end
   end
 
-  get '/tweets/:id/edit' do
+  get '/account/:id/edit' do
     if session[:user_id]
-      @tweet = Tweet.find_by_id(params[:id])
-      if @tweet.user_id == session[:user_id]
-       erb :'tweets/edit_tweet'
+      @accounts = Account.find_by_id(params[:id])
+      if @accounts.user_id == session[:user_id]
+       erb :'account/edit'
       else
-        redirect to '/tweets'
+        redirect to '/account'
       end
     else
       redirect to '/login'
     end
   end
 
-  patch '/tweets/:id' do
+  patch '/account/:id' do
     if params[:content] == ""
-      redirect to "/tweets/#{params[:id]}/edit"
+      redirect to "/account/#{params[:id]}/edit"
     else
-      @tweet = Tweet.find_by_id(params[:id])
-      @tweet.content = params[:content]
-      @tweet.save
-      redirect to "/tweets/#{@tweet.id}"
+      @accounts = Account.find_by_id(params[:id]) # change to all fields of account
+      @accounts.content = params[:content]
+      @accounts.save
+      redirect to "/account/#{@accounts.id}"
     end
   end
 
-  delete '/tweets/:id/delete' do
-    @tweet = Tweet.find_by_id(params[:id])
+  delete '/account/:id/delete' do
+    @accounts = Account.find_by_id(params[:id])
     if session[:user_id]
-      @tweet = Tweet.find_by_id(params[:id])
-      if @tweet.user_id == session[:user_id]
-        @tweet.delete
-        redirect to '/tweets'
+      @accounts = Account.find_by_id(params[:id])
+      if @accounts.user_id == session[:user_id]
+        @accounts.delete
+        redirect to '/account'
       else
-        redirect to '/tweets'
+        redirect to '/account'
       end
     else
       redirect to '/login'
     end
   end
-
 end
