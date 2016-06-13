@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col-md-12">
+    <h2>Add Account</h2>
+    <% unless locals.empty? %>
+      <%= message %>
+    <% end %>
+    <form action="/account" method="POST">
+      <p>Amount <input type="text" name="amount"></p>
+      <p>Account </p>
+      <select>
+      <% @accounts.each do |accounts| %>
+        <option value="<%= accounts.name %>"><%= accounts.name %></option>
+      <% end %>
+      <input class="btn btn-primary" type="submit" value="submit">
+    </form>
+  </div>
+</div>

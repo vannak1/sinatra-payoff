@@ -2,7 +2,11 @@
   <h3> Edit Account </h3>
   <form method="post" action="/account/<%=@accounts.id%>">
     <input id="hidden" type="hidden" name="_method" value="PATCH">
-    <input type="text" name="content" value="<%= @accounts.content %>">
+    Name<input type="text" name="name" value="<%= @accounts.name %>"><br>
+    Balance<input type="text" name="balance" value="<%= @accounts.balance %>"><br>
+    Interest<input type="text" name="interest" value="<%= @accounts.interest %>"><br>
+    Date Due<input type="text" name="due" value="<%= @accounts.date %>"><br>
+    Min_Payment<input type="text" name="min_payment" value="<%= @accounts.min_payment %>"><br>
     <input type="submit" value="submit">
   </form>
 </div>

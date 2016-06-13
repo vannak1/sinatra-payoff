@@ -18,12 +18,13 @@ class AccountsController < ApplicationController
   end
 
   post '/account' do
-    if params[:content] == ""
+    if params[:name] == ""
       redirect to "/account/new"
     else
       user = User.find_by_id(session[:user_id])
-      @accounts = Account.create(:content => params[:content], :user_id => user.id)
-      redirect to "/account/#{@accounts.id}"
+      @accounts = Account.create(:name => params[:name], :balance => params[:init_balance],
+      :interest => params[:interest], :date => params[:due], :min_payment => params[:min_payment], :user_id => user.id)
+      redirect to "/account"
     end
   end
 
@@ -50,11 +51,14 @@ class AccountsController < ApplicationController
   end
 
   patch '/account/:id' do
-    if params[:content] == ""
+    if params[:name] == ""
       redirect to "/account/#{params[:id]}/edit"
     else
-      @accounts = Account.find_by_id(params[:id]) # change to all fields of account
-      @accounts.content = params[:content]
+      @accounts = Account.find_by_id(params[:id])
+      @accounts.name = params[:name]
+      @accounts.balance = params[:init_balance]
+      @accounts.min_payment = params[:min_payment]
+      @accounts.date = params[:due] #change date to due
       @accounts.save
       redirect to "/account/#{@accounts.id}"
     end

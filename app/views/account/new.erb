@@ -1,11 +1,15 @@
 <div class="row">
   <div class="col-md-12">
-    <h2>Add a tweet</h2>
+    <h2>Add Account</h2>
     <% unless locals.empty? %>
       <%= message %>
     <% end %>
     <form action="/account" method="POST">
-      <p>Status: <input type="text" name="content"></p>
+      <p>Name: <input type="text" name="name"></p>
+      <p>Current Balance: <input type="text" name="init_balance"></p>
+      <p>Interest: <input type="text" name="interest"></p>
+      <p>Minimum Payment: <input type="text" name="min_payment"></p>
+      <p>Due Date: <input type="text" name="due"></p>
       <input class="btn btn-primary" type="submit" value="submit">
     </form>
   </div>

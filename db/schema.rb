@@ -11,16 +11,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160612205537) do
+ActiveRecord::Schema.define(version: 20160613005529) do
 
   create_table "accounts", force: :cascade do |t|
-    t.string   "content"
+    t.string   "name"
+    t.integer  "balance"
+    t.integer  "interest"
+    t.integer  "min_payment"
+    t.string   "date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "user_id"
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.integer  "amount"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "account_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "f_name"
+    t.string   "l_name"
+    t.string   "username"
+    t.string   "email"
+    t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-# Could not dump table "users" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
 
 end
