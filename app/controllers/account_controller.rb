@@ -21,9 +21,9 @@ class AccountsController < ApplicationController
     if params[:name] == ""
       redirect to "/account/new"
     else
-      user = User.find_by_id(session[:user_id])
-      @accounts = Account.create(:name => params[:name], :balance => params[:init_balance],
-      :interest => params[:interest], :date => params[:due], :min_payment => params[:min_payment], :user_id => user.id)
+      @user = User.find_by_id(session[:user_id])
+      params[:account][:user_id] = @user.id
+      @accounts = Account.create(params[:account])
       redirect to "/account"
     end
   end
