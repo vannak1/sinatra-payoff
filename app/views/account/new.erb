@@ -5,14 +5,15 @@
       <%= message %>
     <% end %>
     <form action="/account" method="POST">
-      <p>Name: <input type="text" name="name"></p>
-      <p>Current Balance: <input type="text" name="init_balance"></p>
-      <p>Interest: <input type="text" name="interest"></p>
-      <p>Minimum Payment: <input type="text" name="min_payment"></p>
-      <p>Due Date: <input type="text" name="due"></p>
+      <p>Name: <input type="text" name="account[name]"></p>
+      <p>Current Balance: <input type="text" name="account[start_balance]"></p>
+      <p>Interest: <input type="text" name="account[interest]"></p>
+      <p>Minimum Payment: <input type="text" name="account[min_payment]"></p>
+      <p>Due Date: <input type="text" name="account[due]"></p>
       <input class="btn btn-primary" type="submit" value="submit">
     </form>
   </div>
 </div>
 
 Need to add all fields for account
+#change account controller to refelct params[account]

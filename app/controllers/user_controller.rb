@@ -9,10 +9,10 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
-    if [params[:username], params[:email], params[:password]].include?("")
+    if params[:user].empty?
       redirect to '/signup'
     else
-      @user = User.new(:f_name => params[:f_name], :l_name => params[:l_name], :username => params[:username], :email => params[:email], :password => params[:password])
+      @user = User.new(params[:user])
       @user.save
       session[:user_id] = @user.id
       redirect to '/account'
@@ -28,7 +28,7 @@ class UsersController < ApplicationController
   end
 
   post '/login' do
-    user = User.find_by(:username => params[:username])
+    user = User.find_by(email: params[:email])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       redirect "/account"
@@ -46,4 +46,8 @@ class UsersController < ApplicationController
     end
   end
 
+  get '/erase_users' do
+    User.destroy_all
+    redirect to '/'
+  end
 end

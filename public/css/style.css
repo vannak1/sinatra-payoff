@@ -1,7 +1,14 @@
+body {
+  background-color: #c2c1c2
+}
 .form {
   background-color: ;
 }
 
-body {
+.blue-green-bg {
     background-image: url("/images/BLUR-7.jpg");
+}
+
+.txt-centered {
+  text-align: center;
 }

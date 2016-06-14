@@ -6,6 +6,10 @@
     <p><%= @accounts.date %></p>
     <p><%= @accounts.user.f_name %></p>
     <p><%= @accounts.min_payment %></p>
+    <p><% @accounts.transactions.each do |t| %>
+       <%= t %>
+    </p>
+      <% end %>
   </div>
 </div>
 <div class="row">

@@ -9,7 +9,7 @@
       <p>Account </p>
       <select>
       <% @accounts.each do |accounts| %>
-        <option value="<%= accounts.name %>"><%= accounts.name %></option>
+        <option value="accounts[<%= accounts.id %>]"><%= accounts.name %></option>
       <% end %>
       <input class="btn btn-primary" type="submit" value="submit">
     </form>

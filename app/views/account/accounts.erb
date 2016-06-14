@@ -1,15 +1,19 @@
 <div class="row">
   <div class="col-md-6">
-    <p> Welcome, <%= current_user.username %>
-    <h2> Accounts </h2>
-    <li><a href="/account/new"> Add Account </a></li>
+    <p> Welcome, <%= current_user.f_name %>
   </div>
 </div>
+
 <div class="row">
-  <% @accounts.each do |accounts| %>
-    <div class="col-md-4 well">
-      <a href="/account/<%=accounts.id%>"><%= accounts.name %></a>
-      <%= accounts.balance %>
-    </div>
-  <% end %>
+  <div class="col-md-4 well">
+    <h3>Accounts</h3>
+    <% @current_user.accounts.each do |account| %>
+        <% if account.name %>
+          <li><a href="/account/<%=account.id%>"><%= account.name %></a>
+          <%= account.balance %></li>
+        <% end %>
+    <% end %>
+    <br>
+    <button class="btn"><a href="/account/new"> Add Account</a></button>
+  </div>
 </div>
