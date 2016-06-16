@@ -1,12 +1,17 @@
 <div class="row">
-  <h3> Edit Account </h3>
-  <form method="post" action="/account/<%=@accounts.id%>">
-    <input id="hidden" type="hidden" name="_method" value="PATCH">
-    Name<input type="text" name="name" value="<%= @accounts.name %>"><br>
-    Balance<input type="text" name="balance" value="<%= @accounts.balance %>"><br>
-    Interest<input type="text" name="interest" value="<%= @accounts.interest %>"><br>
-    Date Due<input type="text" name="due" value="<%= @accounts.date %>"><br>
-    Min_Payment<input type="text" name="min_payment" value="<%= @accounts.min_payment %>"><br>
-    <input type="submit" value="submit">
-  </form>
+  <div class="col-md-4 well">
+    <h3> Edit Account </h3>
+    <hr>
+    <form method="post" action="/account/<%=@accounts.id%>">
+      <input id="hidden" type="hidden" name="_method" value="PATCH">
+      <label>Name</label><input type="text" name="account[name]" value="<%= @accounts.name %>" required>
+      <label>Balance</label><input type="text" name="account[balance]" value="<%= @accounts.balance %>" required>
+      <label>Interest</label><input type="text" name="account[interest]" value="<%= @accounts.interest %>" required>
+      <label>Min_Payment</label><input type="text" name="account[min_payment]" value="<%= @accounts.min_payment %>" required>
+      <label>Date Due</label><input type="date" name="account[date]" value="<%= @accounts.date %>" required><br>
+      <input style="margin-top: 5px" class="btn btn-danger" type="submit" value="submit">
+    </form>
+  </div>
+  <div class="col-md-8">
+  </div>
 </div>

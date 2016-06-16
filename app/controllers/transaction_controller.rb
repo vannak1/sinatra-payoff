@@ -11,11 +11,10 @@ class TransactionsController < ApplicationController
   end
 
   post '/transaction' do
-    if params[:payment] == ""
-      redirect to "/transaction/new"
-    else
-      @transaction = Transaction.create(:payment => params[:payment], :account_id => params[account][id])
-      redirect to "/account/#{user.accounts.id}"
-    end
+    @account = Account.find(params[:id])
+    params[:transac][:account_id] = @account.id
+    @transaction = Transaction.create(params[:transac])
+    @account.save
+    redirect to "/account"
   end
 end

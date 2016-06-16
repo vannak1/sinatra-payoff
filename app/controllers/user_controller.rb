@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
   get '/signup' do
     if !session[:user_id]
-      erb :'user/signup', locals: {message: "Please sign up before you sign in"}
+      erb :'user/signup', locals: {message: "Please sign up before login."}
     else
       redirect to '/account'
     end
@@ -46,8 +46,11 @@ class UsersController < ApplicationController
     end
   end
 
-  get '/erase_users' do
+  get '/destroy' do
     User.destroy_all
+    Account.destroy_all
+    Transaction.destroy_all
+    session.destroy
     redirect to '/'
   end
 end

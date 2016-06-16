@@ -55,10 +55,7 @@ class AccountsController < ApplicationController
       redirect to "/account/#{params[:id]}/edit"
     else
       @accounts = Account.find_by_id(params[:id])
-      @accounts.name = params[:name]
-      @accounts.balance = params[:init_balance]
-      @accounts.min_payment = params[:min_payment]
-      @accounts.date = params[:due] #change date to due
+      @accounts.update(params[:account])
       @accounts.save
       redirect to "/account/#{@accounts.id}"
     end

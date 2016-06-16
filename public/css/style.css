@@ -11,4 +11,39 @@ body {
 
 .txt-centered {
   text-align: center;
+  color: white;
+}
+
+input {
+  padding-left: 10px;
+  height: 34px;
+  width: 100%;
+  border-radius: 3px;
+  border: 1px solid transparent;
+  border-top: none;
+  border-bottom: 1px solid #DDD;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,.39), 0 -1px 1px #FFF, 0 1px 0 #FFF;
+}
+
+select {
+  padding-left: 10px;
+  margin-bottom: 10px;
+  height: 34px;
+  width: 100%;
+  border-radius: 3px;
+  border: 1px solid transparent;
+  border-top: none;
+  border-bottom: 1px solid #DDD;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,.39), 0 -1px 1px #FFF, 0 1px 0 #FFF;
+}
+
+hr {
+   color: #d2c2d1;
+   background: #d1d2d2;
+   width: 100%;
+   height: 1px;
+}
+
+.btn-margin{
+  margin-top: 4px;
 }

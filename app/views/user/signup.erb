@@ -2,16 +2,16 @@
   <div class="col-md-4">
   </div>
   <div class="col-md-4 form well">
-    <h2>Users</h2>
+    <h3>Sign Up</h3>
     <% unless locals.empty? %>
       <%= message %>
     <% end %>
-    <h3>Sign Up</h3>
+    <hr>
     <form action="/signup" method="POST">
       <input type="text" name="user[f_name]" placeholder="First Name"><br>
       <input type="email" name="user[email]" placeholder="Email"><br>
       <input type="password" name="user[password]" placeholder="Password"><br>
-      <input type="submit" value="submit">
+      <input class="btn btn-warning btn-block btn-margin" type="submit" value="Submit">
     </form>
   </div>
   <div class="col-md-4">

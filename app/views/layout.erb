@@ -2,25 +2,35 @@
 <html>
   <head>
     <title>Vanes</title>
+    <script src="/js/external/jquery/jquery.js"></script>
+    <script src="/js/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/js/jquery-ui.min.css">
+
     <style>
     body {
     padding: 80px 30px;
     }
     </style>
   </head>
-  <body>
+  <body class="blue-green-bg">
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
+          <% if logged_in? %>
+          <a class="navbar-brand" href="/account">
+          <% else %>
           <a class="navbar-brand" href="/">
+          <% end %>
             <img alt="Vanes" src="">
           </a>
+
         </div>
         <div class="navbar-links">
           <ul class="nav nav-pills pull-right">
             <% if logged_in? %>
+              <li><a href="/account"> Accounts </a></li>
               <li><a href="/logout"> Log Out </a></li>
             <% else %>
               <li><a href="/signup">SIGN UP</a></li>

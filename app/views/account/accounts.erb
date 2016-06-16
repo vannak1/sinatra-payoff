@@ -7,13 +7,43 @@
 <div class="row">
   <div class="col-md-4 well">
     <h3>Accounts</h3>
+    <hr>
+    <ul class="list-group">
     <% @current_user.accounts.each do |account| %>
         <% if account.name %>
-          <li><a href="/account/<%=account.id%>"><%= account.name %></a>
-          <%= account.balance %></li>
+          <li class="list-group-item">
+            <a href="/account/<%=account.id%>"><%= account.name%></a> : $<%= account.curr_balance %>
+            <% if account.due_date > 0 %>
+            <p>Due in <%= account.due_date %> days.</p>
+            <% elsif account.due_date > 0 %>
+            <p><%= account.due_date %> days overdue.</p>
+            <% else %>
+            <p>Due today!</p>
+            <% end %>
         <% end %>
     <% end %>
-    <br>
-    <button class="btn"><a href="/account/new"> Add Account</a></button>
+    </ul>
+    <div class="btn-group">
+      <a href="/account/new" class="btn btn-primary">Add Account</a>
+      <a href="/transaction/new" class="btn btn-success"> Make Payment</a>
+    </div>
+  </div>
+  <div class="col-md-8 well">
+    <h3>Suggestions</h3>
+    <hr>
+    <p>Total Interest</p>
+    <ul>
+      <% @current_user.accounts.each do |account| %>
+          <% if account.name %>
+            <% options = {balance: account.curr_balance, interest: account.interest, min_payment: account.min_payment} %>
+            <li class="list-group-item">
+              <%= account.name%> : $<%= account.curr_balance %>
+              <% calculated = account.total_paid(options) %>
+              <p><%= calculated[:num_months] %></p>
+              <p><%= calculated[:total_cost] %></p>
+              <p><%= calculated[:fincharge] %></p>
+          <% end %>
+      <% end %>
+    </ul>
   </div>
 </div>

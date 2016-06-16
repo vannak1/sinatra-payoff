@@ -1,23 +1,36 @@
 <div class="row">
-  <div class="col-md-4 well">
-    <p><%= @accounts.name %></p>
-    <p><%= @accounts.balance %></p>
-    <p><%= @accounts.interest %></p>
-    <p><%= @accounts.date %></p>
-    <p><%= @accounts.user.f_name %></p>
-    <p><%= @accounts.min_payment %></p>
-    <p><% @accounts.transactions.each do |t| %>
-       <%= t %>
-    </p>
-      <% end %>
+  <div class="col-md-12 well">
+    <h3>Details for <%= @accounts.name %></h3>
+    <p> <a href="/account">Back to Accounts Summary</a></p>
   </div>
 </div>
 <div class="row">
-  <div class="col-md-4">
-    <form method="post" action="/account/<%=@accounts.id%>/delete">
-      <input id="hidden" type="hidden" name="_method" value="DELETE">
-      <input class="btn btn-default btn-danger" type="submit" value="Delete">
-    </form>
-    <button class="btn btn-default"><a href="/account/<%=@accounts.id%>/edit">Edit</a></button>
-  <div>
+  <div class="col-md-4 well">
+    <h3><%= @accounts.name %></h3>
+    <hr>
+    <ul class="list-group">
+    <li class="list-group-item">Starting Balance: $<%= @accounts.balance %></li>
+    <li class="list-group-item">Current Balance: $<%= @accounts.curr_balance %></li>
+    <li class="list-group-item">Interest: <%= @accounts.interest %> %</li>
+    <li class="list-group-item">Next Due: <%= @accounts.date.strftime("%B %d, %Y") %></li>
+    <li class="list-group-item">Minimum Payment: <%= @accounts.min_payment %></li>
+    </ul>
+      <a href="/account/<%=@accounts.id%>/edit" class="btn btn-block btn-warning">Edit</a>
+
+      <form method="post" action="/account/<%=@accounts.id%>/delete">
+        <input id="hidden" type="hidden" name="_method" value="DELETE">
+        <input class="btn btn-block btn-danger" type="submit" value="Delete">
+      </form>
+    </div>
+    <div class="col-md-8 well">
+      <h3> Transactions </h3>
+      <hr>
+      <ul class="list-group">
+        <%@accounts.transactions.each do |t| %>
+           <li class="list-group-item">
+             Paid $<%= t.amount %> on <%= t.created_at.strftime("%B %d, %Y") %>
+           </li>
+        <% end %>
+      </ul>
+    </div>
 </div>
