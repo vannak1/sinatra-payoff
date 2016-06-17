@@ -5,7 +5,7 @@
       <%= message %>
     <% end %>
     <form action="/transaction" method="POST">
-      <p>Amount <input type="text" name="transac[amount]" placeholder="100.23" required></p>
+      <p>Amount <input class="input-fields" type="text" name="transac[amount]" placeholder="100.23" required></p>
       <p>Select Account to Pay </p>
       <select name="id">
         <% @accounts.each do |account| %>

@@ -4,11 +4,11 @@
     <hr>
     <form method="post" action="/account/<%=@accounts.id%>">
       <input id="hidden" type="hidden" name="_method" value="PATCH">
-      <label>Name</label><input type="text" name="account[name]" value="<%= @accounts.name %>" required>
-      <label>Balance</label><input type="text" name="account[balance]" value="<%= @accounts.balance %>" required>
-      <label>Interest</label><input type="text" name="account[interest]" value="<%= @accounts.interest %>" required>
-      <label>Min_Payment</label><input type="text" name="account[min_payment]" value="<%= @accounts.min_payment %>" required>
-      <label>Date Due</label><input type="date" name="account[date]" value="<%= @accounts.date %>" required><br>
+      <label>Name</label><input class="input-fields" type="text" name="account[name]" value="<%= @accounts.name %>" required>
+      <label>Balance</label><input class="input-fields" type="text" name="account[balance]" value="<%= @accounts.balance %>" required>
+      <label>Interest</label><input class="input-fields" type="text" name="account[interest]" value="<%= @accounts.interest %>" required>
+      <label>Min_Payment</label><input class="input-fields" type="text" name="account[min_payment]" value="<%= @accounts.min_payment %>" required>
+      <label>Day of Month Due</label><input class="input-fields" type="number" name="account[date]" value="<%= @accounts.date %>" required><br>
       <input style="margin-top: 5px" class="btn btn-danger" type="submit" value="submit">
     </form>
   </div>

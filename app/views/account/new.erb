@@ -4,14 +4,14 @@
     <h2>Add Account</h2>
     <hr>
     <% unless locals.empty? %>
-      <%= message %>
+          <%= message %>
     <% end %>
     <form action="/account" method="POST">
       <label>Name:</label> <input type="text" name="account[name]" placeholder="Visa" required>
       <label>Current Balance:</label> <input type="number" step=".01" min="0" name="account[balance]" placeholder="1240.32" required>
-      <label>Interest:</label> <input type="number" step=".01" min="0"  name="account[interest]" placeholder="14.9" required>
-      <label>Minimum Payment:</label> <input type="number" step=".01" min="0"  name="account[min_payment]" placeholder="110" required>
-      <label>Due Date:</label> <input type="date" name="account[date]" placeholder="12/14/2016" required>
+      <label>Interest:</label> <input type="number" step=".01" min="0"  name="account[interest]" placeholder="14.99" required>
+      <label>Minimum Payment:</label> <input type="number" step=".01" min="0"  name="account[min_payment]" placeholder="110.25" required>
+      <label>Day of Month Due:</label> <input type="number" name="account[date]" placeholder="14" required>
       <input class="btn btn-primary" type="submit" value="submit">
     </form>
   </div>

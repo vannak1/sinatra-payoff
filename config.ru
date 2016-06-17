@@ -9,3 +9,4 @@ run ApplicationController
 use UsersController
 use AccountsController
 use TransactionsController
+use VanesController

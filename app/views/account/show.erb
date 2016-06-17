@@ -12,7 +12,7 @@
     <li class="list-group-item">Starting Balance: $<%= @accounts.balance %></li>
     <li class="list-group-item">Current Balance: $<%= @accounts.curr_balance %></li>
     <li class="list-group-item">Interest: <%= @accounts.interest %> %</li>
-    <li class="list-group-item">Next Due: <%= @accounts.date.strftime("%B %d, %Y") %></li>
+    <li class="list-group-item">Due: <%= @accounts.date %></li>
     <li class="list-group-item">Minimum Payment: <%= @accounts.min_payment %></li>
     </ul>
       <a href="/account/<%=@accounts.id%>/edit" class="btn btn-block btn-warning">Edit</a>

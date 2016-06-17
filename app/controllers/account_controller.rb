@@ -1,5 +1,4 @@
 class AccountsController < ApplicationController
-
   get '/account' do
     @current_user = User.find_by_id(session[:user_id])
     if @current_user
@@ -18,8 +17,8 @@ class AccountsController < ApplicationController
   end
 
   post '/account' do
-    if params[:name] == ""
-      redirect to "/account/new"
+    if !params[:account][:date].to_i.between?(0,28)
+      erb :"/account/new", locals: {message: "Day must be between 0 and 28."}
     else
       @user = User.find_by_id(session[:user_id])
       params[:account][:user_id] = @user.id
@@ -51,7 +50,7 @@ class AccountsController < ApplicationController
   end
 
   patch '/account/:id' do
-    if params[:name] == ""
+    if params[:date] != /\d{2}/
       redirect to "/account/#{params[:id]}/edit"
     else
       @accounts = Account.find_by_id(params[:id])

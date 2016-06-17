@@ -14,7 +14,7 @@ body {
   color: white;
 }
 
-input {
+.input-fields {
   padding-left: 10px;
   height: 34px;
   width: 100%;
@@ -46,4 +46,8 @@ hr {
 
 .btn-margin{
   margin-top: 4px;
+}
+
+.signup-form{
+  text-align: center;
 }

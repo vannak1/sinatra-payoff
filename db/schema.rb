@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160615160557) do
+ActiveRecord::Schema.define(version: 20160617002051) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name"
@@ -31,6 +31,11 @@ ActiveRecord::Schema.define(version: 20160615160557) do
     t.integer  "account_id"
   end
 
+  create_table "user_vanes", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "vane_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "f_name"
     t.string   "l_name"
@@ -39,6 +44,21 @@ ActiveRecord::Schema.define(version: 20160615160557) do
     t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "users_vane", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "vane_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "vanes", force: :cascade do |t|
+    t.string   "name"
+    t.decimal  "amount"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "description"
   end
 
 end

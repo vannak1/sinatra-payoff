@@ -1,5 +1,4 @@
 class Account < ActiveRecord::Base
-  include Math
   belongs_to :user
   has_many :transactions
 
@@ -19,15 +18,15 @@ class Account < ActiveRecord::Base
   end
 
   def total_paid(options)
-    mr = options[:interest] / 1200
+    monthly_rate = options[:interest] / 1200
     balance = options[:balance]
     total_cost = options[:balance]
     fincharge = 0.00
     min_payment = options[:min_payment]
 
-    if mr > 0
-      tmp1 = Math.log(1 - (mr * balance / min_payment))
-      tmp2 = Math.log(1 + mr)
+    if monthly_rate > 0
+      tmp1 = Math.log(1 - (monthly_rate * balance / min_payment))
+      tmp2 = Math.log(1 + monthly_rate)
       num_months = ((tmp1 * -1) / tmp2).ceil
       total_cost = num_months * min_payment
       fincharge = total_cost - balance
@@ -41,5 +40,19 @@ class Account < ActiveRecord::Base
       end
     end
     {num_months: num_months, total_cost: total_cost.round(2), fincharge: fincharge.round(2)}
+  end
+
+  def pay_off(options)
+    monthly_rate = options[:interest] / 1200
+    balance = options[:balance]
+    payment = options[:payment]
+    n = options[:month] * 30.3
+
+    #B = A(1+i)**n - (P/i)[(1+i)**n - 1]
+    tmp1 = balance * (1 + monthly_rate)**n
+    tmp2 = payment / monthly_rate
+    tmp3 = (1 + monthly_rate)**n - 1
+
+    payoff = (tmp1 - tmp2 * tmp3).round(2)
   end
 end

@@ -50,6 +50,7 @@ class UsersController < ApplicationController
     User.destroy_all
     Account.destroy_all
     Transaction.destroy_all
+    Vane.destroy_all
     session.destroy
     redirect to '/'
   end

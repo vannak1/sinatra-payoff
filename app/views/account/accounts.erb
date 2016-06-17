@@ -1,7 +1,6 @@
 <div class="row">
-  <div class="col-md-6">
-    <p> Welcome, <%= current_user.f_name %>
-  </div>
+  <div class="col-md-12 well">
+<p> Welcome, <%= current_user.f_name %>
 </div>
 
 <div class="row">
@@ -13,37 +12,55 @@
         <% if account.name %>
           <li class="list-group-item">
             <a href="/account/<%=account.id%>"><%= account.name%></a> : $<%= account.curr_balance %>
-            <% if account.due_date > 0 %>
-            <p>Due in <%= account.due_date %> days.</p>
-            <% elsif account.due_date > 0 %>
-            <p><%= account.due_date %> days overdue.</p>
-            <% else %>
-            <p>Due today!</p>
-            <% end %>
         <% end %>
     <% end %>
     </ul>
-    <div class="btn-group">
       <a href="/account/new" class="btn btn-primary">Add Account</a>
-      <a href="/transaction/new" class="btn btn-success"> Make Payment</a>
-    </div>
+      <a href="/transaction/new" class="btn btn-info"> Record Payment</a>
   </div>
   <div class="col-md-8 well">
-    <h3>Suggestions</h3>
+    <h3>Dashboard</h3>
     <hr>
-    <p>Total Interest</p>
-    <ul>
-      <% @current_user.accounts.each do |account| %>
-          <% if account.name %>
-            <% options = {balance: account.curr_balance, interest: account.interest, min_payment: account.min_payment} %>
-            <li class="list-group-item">
-              <%= account.name%> : $<%= account.curr_balance %>
-              <% calculated = account.total_paid(options) %>
-              <p><%= calculated[:num_months] %></p>
-              <p><%= calculated[:total_cost] %></p>
-              <p><%= calculated[:fincharge] %></p>
-          <% end %>
-      <% end %>
-    </ul>
+    <p>Select your goal</p>
+    <form action="/vanes" method="POST">
+    <% Vane.all.each do |vane| %>
+      <input type="checkbox" name="user[vane_ids][]" id="vane_<%=vane.id%>" value="<%= vane.id %>"><%= vane.name %></input>
+    <% end %>
+     <input type="submit" value="submit">
+    </form>
+  <hr>
+      <% current_user.vanes.each do |vane| %>
+      <!--Payoff Debt View - Shows total interest paid -->
+      <% if vane.name == "Payoff" %>
+         <h3>Save on Interest</h3>
+         <% num_months = 0 %>
+         <% fincharge = 0 %>
+         <% num_months_2 = 0 %>
+         <% fincharge_2 = 0 %>
+         <% @current_user.accounts.collect do |account| %>
+             <% if account.name %>
+               <% options = {balance: account.balance, interest: account.interest, min_payment: account.min_payment} %>
+                 <% calculated = account.total_paid(options) %>
+                 <% num_months += calculated[:num_months] %>
+                 <% fincharge += calculated[:fincharge] %>
+
+                 <% options_2 = {balance: account.balance, interest: account.interest, min_payment: account.min_payment + 100} %>
+                   <% calculated_2 = account.total_paid(options_2) %>
+                   <% num_months_2 += calculated_2[:num_months] %>
+                   <% fincharge_2 += calculated_2[:fincharge] %>
+              <% end %>
+           <% end %>
+            <p><%= "It will take <b>" + num_months.to_s + "</b> months and cost $" + fincharge.to_s + " in interest with minimum payments." %></p>
+            <p><%= "With $100 more each month, you'll pay it off in <b>" + num_months_2.to_s + "</b>. And save $" + (fincharge - fincharge_2).to_s %>
+         <hr>
+
+    <% else %>
+       <h3><%= vane.name %></h3>
+        <p><%= vane.description %></p>
+        <hr>
+    <% end %>
+
+    <% end %>
+  <!-- end Payoff Debt View -->
   </div>
 </div>

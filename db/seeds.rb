@@ -1,0 +1,8 @@
+Vane.create(name: "Payoff", amount: 10, description: "Pay 10%.")
+Vane.create(name: "Invest", amount: 10, description: "Invest 10%.")
+Vane.create(name: "Save", amount: 10, description: "Save 10%.")
+User.create(f_name: "John", email: "john@gmail.com", password: "12345")
+user = User.find_by(email: "john@gmail.com")
+Account.create(name:"Visa", balance: 5688.14, interest: 21.99, date: 3, min_payment: 199.95, user_id: user.id)
+Account.create(name:"MasterCard", balance: 3458.24, interest: 18.99, date: 14, min_payment: 225.32, user_id: user.id)
+Account.create(name:"AmEx", balance: 4590.22, interest: 14.99, date: 28, min_payment: 246.33, user_id: user.id)
